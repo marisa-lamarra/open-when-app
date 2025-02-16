@@ -1,0 +1,75 @@
+helloimport tkinter as tk
+from tkinter import messagebox, Toplevel, Label, Scrollbar, Text
+import os
+
+# Function to display the content of the selected letter in a styled window
+def open_letter(filename):
+    if os.path.isfile(filename):
+        with open(filename, 'r') as file:
+            content = file.read()
+        
+        # Create a new window for the letter
+        letter_window = Toplevel(root)
+        letter_window.title("Open When...")
+        letter_window.geometry("500x400")
+        letter_window.configure(bg="#FFC0CB")  # Baby pink background
+
+        # Create a frame for the content
+        content_frame = tk.Frame(letter_window, bg="#FFC0CB")
+        content_frame.pack(expand=True, fill="both", padx=20, pady=20)
+
+        # Create a label for the title
+        title_label = tk.Label(content_frame, text="Open When...", bg="#FFC0CB", fg="black", font=("Helvetica", 16, "bold"))
+        title_label.pack(pady=10)
+
+        # Create a text widget with a scrollbar
+        text_widget = Text(content_frame, wrap="word", bg="white", fg="black", font=("Helvetica", 12), padx=10, pady=10, height=15, width=50)
+        text_widget.insert("1.0", content)
+        text_widget.config(state="disabled")  # Make the text widget read-only
+        text_widget.pack(expand=True, fill="both", padx=10, pady=10)
+
+        # Add a scrollbar to the text widget
+        scrollbar = Scrollbar(text_widget)
+        scrollbar.pack(side="right", fill="y")
+        text_widget.config(yscrollcommand=scrollbar.set)
+        scrollbar.config(command=text_widget.yview)
+    else:
+        messagebox.showerror("Error", f"File not found: {filename}")
+
+# Create the main window
+root = tk.Tk()
+root.title("Open When...")
+root.geometry("600x600")  # Adjusted window size
+
+# Set background color
+root.configure(bg="#FFC0CB")  # Baby pink background
+
+# List of buttons and corresponding files
+letters = [
+    ("Open when you're doubting us", "doubting_us.txt"),
+    ("Open when you feel like pushing me away", "pushing_away.txt"),
+    ("Open when you need to know how much I appreciate you", "appreciate_you.txt"),
+    ("Open when you feel like you don't deserve good love", "deserve_good_love.txt"),
+    ("Open when you've had a stressful day", "stressful_day.txt"),
+    ("Open when you miss me", "miss_me.txt"),
+    ("Open when you're struggling at work", "struggling_at_work.txt"),
+    ("Open when you need a hug", "need_a_hug.txt"),
+    ("Open when you're overthinking", "overthinking.txt"),
+    ("Open when you're angry with me and I've messed up", "angry_with_me.txt"),
+    ("Open when you can't sleep", "cant_sleep.txt"),
+    ("Open when you need hope for the future", "hope_for_future.txt"),
+    ("Open when you're scared of what could go wrong", "scared_of_wrong.txt"),
+]
+
+# Create buttons for each letter
+for text, file in letters:
+    button = tk.Button(
+        root, text=text, width=30, height=3, bg="white", fg="black", font=("Helvetica", 10, "bold"),
+        relief="solid", bd=2, highlightbackground="#FFB6C1",  # Light pink outline
+        wraplength=200, justify="center",  # Wrap text and center align
+        command=lambda f=file: open_letter(f)
+    )
+    button.pack(pady=5)
+
+# Run the application
+root.mainloop()

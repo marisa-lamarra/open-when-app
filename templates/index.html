@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open When...</title>
+    <style>
+        body { background-color: #FFC0CB; text-align: center; font-family: Arial, sans-serif; }
+        .button { display: block; width: 300px; margin: 10px auto; padding: 15px; background-color: white; border: 2px solid #FFB6C1; text-decoration: none; font-weight: bold; color: black; border-radius: 10px; }
+        .button:hover { background-color: #FFB6C1; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Open When...</h1>
+    {% for letter, filename in letters.items() %}
+        <a href="/letter/{{ letter }}" class="button">{{ letter }}</a>
+    {% endfor %}
+</body>
+</html>
