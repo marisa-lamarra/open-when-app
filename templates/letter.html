@@ -5,17 +5,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ letter_name }}</title>
   <style>
-    body { background-color: #FFC0CB; text-align: center; font-family: Arial, sans-serif; }
-    .container { max-width: 600px; margin: 20px auto; background: white; padding: 20px; border-radius: 10px; }
-    pre { text-align: left; white-space: pre-wrap; word-wrap: break-word; }
+    /* Background with a soft gradient */
+    body { 
+      background: linear-gradient(to bottom, #FFDEE9, #B5FFFC); 
+      text-align: center; 
+      font-family: "Georgia", serif; 
+      padding: 20px;
+    }
+
+    /* Letter container */
+    .container { 
+      max-width: 600px; 
+      margin: auto; 
+      background: #fff; 
+      padding: 25px; 
+      border-radius: 15px; 
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      text-align: left; 
+    }
+
+    /* Letter content */
+    .letter-content { 
+      font-size: 18px; 
+      line-height: 1.6; 
+      color: #333; 
+      white-space: pre-wrap; 
+      word-wrap: break-word;
+      padding: 15px;
+      border-left: 5px solid #FF66B2; 
+      background: #FFEEF3; 
+      border-radius: 8px;
+    }
+
+    /* Back button */
+    .back-link { 
+      display: inline-block; 
+      margin-top: 15px; 
+      text-decoration: none; 
+      font-weight: bold; 
+      color: #FF4081; 
+      font-size: 16px;
+    }
+
+    .back-link:hover { 
+      text-decoration: underline; 
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>{{ letter_name }}</h1>
-    <pre>{{ content }}</pre>
-    <a href="/" style="text-decoration: none; font-weight: bold;">⬅ Back</a>
+    <p class="letter-content">{{ content }}</p>
+    <a href="/" class="back-link">⬅ Back</a>
   </div>
 </body>
 </html>
+
 
