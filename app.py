@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -38,10 +38,6 @@ def open_letter(letter_name):
         except FileNotFoundError:
             return "Sorry, this letter is missing.", 404
     return "Invalid Letter", 400
-
-if __name__ == "__main__":
-    app.run(debug=True)
-    return render_template("index.html")  # Modify as needed
 
 if __name__ == "__main__":
     app.run(debug=True)
