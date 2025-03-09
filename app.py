@@ -22,39 +22,34 @@ letters = {
 }
 
 # File to store requests
-REQUESTS_HTML_FILE = "requests.txt"  # File where requests will be saved
+REQUESTS_FILE = "requests.txt"
 
-# Home Page with Letter Buttons (No changes)
-@app.route("/")
-def home():
-    return render_template("index.html", letters=letters)
-
-# Route to Display Letter Content (No changes)
-@app.route("/letter/<letter_name>")
-def open_letter(letter_name):
-    filename = letters.get(letter_name, None)
-    if filename:
-        try:
-            with open(filename, "r") as file:
-                content = file.read()
-            return render_template("letter.html", letter_name=letter_name, content=content)
-        except FileNotFoundError:
-            return "Sorry, this letter is missing.", 404
-    return "Invalid Letter", 400
-
-# Route to Handle Requests (Save the requests to requests.html)
+# Route to Display the Request Form
 @app.route("/request", methods=["GET", "POST"])
 def make_request():
     if request.method == "POST":
+        # Get the request submitted by the user
         user_request = request.form.get("user_request")
+        
+        # Check if the user_request is not empty
         if user_request:
-            # Add the request to the requests.html file in a readable format
-            with open(REQUESTS_HTML_FILE, "a") as file:
-                # Write the request inside <p> tags for HTML formatting
-                file.write(user_request + "\n")
-            return redirect("/")  # Redirect back to home after submission
-    return render_template("request.html")
+            # Make sure the file can be written to (create it if it doesn't exist)
+            if not os.path.exists(REQUESTS_FILE):
+                with open(REQUESTS_FILE, "w") as file:
+                    file.write("")  # Create an empty file if it doesn't exist
+
+            # Append the request to the file
+            with open(REQUESTS_FILE, "a") as file:
+                file.write(user_request + "\n")  # Save the request in the file
+            
+            return redirect("/")  # Redirect to the home page after submission
+
+    return render_template("request.html")  # Render the request form
+
+# Home Page Route (Optional - you already have this)
+@app.route("/")
+def home():
+    return render_template("index.html")  # Modify as needed
 
 if __name__ == "__main__":
     app.run(debug=True)
-
