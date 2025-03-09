@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
 
@@ -21,6 +21,9 @@ letters = {
     "Open when you're scared of what could go wrong": "scared_of_wrong.txt",
 }
 
+# File to store requests
+REQUESTS_FILE = "requests.txt"
+
 # Home Page with Letter Buttons
 @app.route("/")
 def home():
@@ -38,6 +41,17 @@ def open_letter(letter_name):
         except FileNotFoundError:
             return "Sorry, this letter is missing.", 404
     return "Invalid Letter", 400
+
+# Route to Handle Requests
+@app.route("/request", methods=["GET", "POST"])
+def make_request():
+    if request.method == "POST":
+        user_request = request.form.get("user_request")
+        if user_request:
+            with open(REQUESTS_FILE, "a") as file:
+                file.write(user_request + "\n")  # Save request in a file
+            return redirect("/")  # Redirect back to home after submission
+    return render_template("request.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
