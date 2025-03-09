@@ -13,15 +13,13 @@
     </style>
 </head>
 <body>
+    <!-- Request Button at the Top -->
+    <a href="/request" class="request-button">💌 Make a Request</a>
+
     <h1>Open When...</h1>
 
     {% for letter, filename in letters.items() %}
         <a href="/letter/{{ letter }}" class="button">{{ letter }}</a>
     {% endfor %}
-
-    <!-- Request Button -->
-    <br>
-    <a href="/request" class="request-button">💌 Make a Request</a>
-
 </body>
 </html>
