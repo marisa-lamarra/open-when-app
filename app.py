@@ -22,7 +22,7 @@ letters = {
 }
 
 # File to store requests
-REQUESTS_HTML_FILE = "requests.html"  # File where requests will be saved
+REQUESTS_HTML_FILE = "requests.txt"  # File where requests will be saved
 
 # Home Page with Letter Buttons (No changes)
 @app.route("/")
@@ -51,7 +51,7 @@ def make_request():
             # Add the request to the requests.html file in a readable format
             with open(REQUESTS_HTML_FILE, "a") as file:
                 # Write the request inside <p> tags for HTML formatting
-                file.write(f"<p>{user_request}</p>\n")
+                file.write(user_request + "\n")
             return redirect("/")  # Redirect back to home after submission
     return render_template("request.html")
 
