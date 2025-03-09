@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
 
-# List of letters
+# List of letters (No changes to this part)
 letters = {
     "Open Monday": "open_monday.txt",
     "Open ASAP (but not if you feel smushed)": "open_recently.txt",
@@ -22,14 +22,14 @@ letters = {
 }
 
 # File to store requests
-REQUESTS_FILE = "requests.txt"
+REQUESTS_HTML_FILE = "requests.html"  # File where requests will be saved
 
-# Home Page with Letter Buttons
+# Home Page with Letter Buttons (No changes)
 @app.route("/")
 def home():
     return render_template("index.html", letters=letters)
 
-# Route to Display Letter Content
+# Route to Display Letter Content (No changes)
 @app.route("/letter/<letter_name>")
 def open_letter(letter_name):
     filename = letters.get(letter_name, None)
@@ -42,16 +42,19 @@ def open_letter(letter_name):
             return "Sorry, this letter is missing.", 404
     return "Invalid Letter", 400
 
-# Route to Handle Requests
+# Route to Handle Requests (Save the requests to requests.html)
 @app.route("/request", methods=["GET", "POST"])
 def make_request():
     if request.method == "POST":
         user_request = request.form.get("user_request")
         if user_request:
-            with open(REQUESTS_FILE, "a") as file:
-                file.write(user_request + "\n")  # Save request in a file
+            # Add the request to the requests.html file in a readable format
+            with open(REQUESTS_HTML_FILE, "a") as file:
+                # Write the request inside <p> tags for HTML formatting
+                file.write(f"<p>{user_request}</p>\n")
             return redirect("/")  # Redirect back to home after submission
     return render_template("request.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
+
