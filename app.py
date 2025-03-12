@@ -5,6 +5,8 @@ app = Flask(__name__)
 # List of letters
 letters = {
     "Open when you're not sure about the space": "space.txt",
+    "Open when you need a laugh": "want_to_laugh.txt",
+    "Open when your brain won't shut up": "brain_shutup.txt",
     "Open Monday": "open_monday.txt",
     "Open when you just need reassurance": "open_recently.txt",
     "Open when you're doubting us": "doubting_us.txt",
