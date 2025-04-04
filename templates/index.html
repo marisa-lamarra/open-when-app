@@ -8,15 +8,33 @@
         body { background-color: #FFC0CB; text-align: center; font-family: Arial, sans-serif; }
         .button { display: block; width: 300px; margin: 10px auto; padding: 15px; background-color: white; border: 2px solid #FFB6C1; text-decoration: none; font-weight: bold; color: black; border-radius: 10px; }
         .button:hover { background-color: #FFB6C1; color: white; }
+        
         .request-button { margin-top: 20px; display: inline-block; padding: 15px; background: #ff69b4; color: white; font-weight: bold; text-decoration: none; border-radius: 10px; }
         .request-button:hover { background: #ff1493; }
+
+        /* Terms & Conditions Button - Smaller & Grey */
+        .terms-button { 
+            font-size: 12px; 
+            color: #555; 
+            text-decoration: none;
+            display: block;
+            margin: 5px auto;
+        }
+
+        .terms-button:hover { 
+            color: black;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <h1>Open When...</h1>
 
-     <!-- Request Button at the Top -->
+    <!-- Request Button at the Top -->
     <a href="/request" class="request-button">💌 Make a Request</a>
+
+    <!-- Terms & Conditions Button (Smaller, Clickable) -->
+    <a href="/letter/Terms%20%26%20Conditions" class="terms-button">📜 Terms & Conditions</a>
 
     {% for letter, filename in letters.items() %}
         <a href="/letter/{{ letter }}" class="button">{{ letter }}</a>
